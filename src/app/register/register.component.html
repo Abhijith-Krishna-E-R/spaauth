@@ -1,0 +1,30 @@
+<div class="container-fluid w-25">
+    <div>
+        <h1 class="display-3">Register</h1>
+        <hr>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="register()" method="post">
+        <div class="form-floating mb-2">
+            <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username">
+            <label for="username">Username</label>
+        </div>
+        <div class="form-floating mb-2">
+            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email">
+            <label for="email">Email Address</label>
+        </div>
+        <div class="form-floating mb-2">
+            <input type="text" id="phone" formControlName="phone" class="form-control" placeholder="Phone">
+            <label for="phone">Phone Number</label>
+        </div>
+        <div class="form-floating mb-2">
+            <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password">
+            <label for="password">Password</label>
+        </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="Register">
+            <div class="text-muted">
+                Already have an account? login <a routerLink="/signin" class="text-decoration-none">here</a>.
+            </div>
+        </div>
+    </form>
+</div>
