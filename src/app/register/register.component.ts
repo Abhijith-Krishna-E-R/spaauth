@@ -21,13 +21,27 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   register() {
-    // send data to json-server, with json file: src/assets/db.json 
-    this.http.post<any>('http://localhost:3000/users', this.registerForm.value).subscribe(res => {
-      alert(`inserted user: ${res.username} with id: ${res.id}`);
-    })
+    // temporary validation
+    const formUser = this.registerForm.value;
+    if (!formUser.username.length || !formUser.password.length) {
+      alert('Please fill the details!');
+      return;
+    }
+
+    this.http.get<any>('http://localhost:3000/users').subscribe(res => {
+      if (res.find((u: any) => u.username == formUser.username)) {
+        alert('User already exist!');
+        this.registerForm.reset();
+      }
+      else {
+        // send data to json-server, with json file: src/assets/db.json 
+        this.http.post<any>('http://localhost:3000/users', formUser.value).subscribe(res => {
+          alert(`inserted user: ${res.username} with id: ${res.id}`);
+        });
+      }
+    });
   }
 }
